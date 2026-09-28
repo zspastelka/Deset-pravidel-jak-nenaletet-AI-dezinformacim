@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>Co je to AI</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  margin: 0;
+  padding: 20px;
+}
+
+/* HLAVIČKA */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.header-left img,
+.header-right img {
+  height: 60px;
+}
+
+.header-center {
+  text-align: center;
+  flex: 1;
+}
+
+.header-center h1 {
+  margin: 0;
+}
+
+.header-center h2 {
+  margin: 5px 0 0;
+  font-size: 18px;
+  color: #555;
+}
+
+.support-text {
+  font-size: 11px;
+}
+
+/* BLOK */
+#method {
+  background: #eef3ff;
+  border-left: 6px solid #4a90e2;
+  padding: 15px;
+  margin: 20px 0;
+}
+
+/* RESPONZIVNÍ GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* KARTA */
+.case {
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.case img {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  background: #eee;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* FULLSCREEN */
+#viewer {
+  display:none;
+  position:fixed;
+  top:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.9);
+  justify-content:center;
+  align-items:center;
+}
+
+#viewer img {
+  max-width:90%;
+  max-height:90%;
+}
+
+#close {
+  position:absolute;
+  top:20px;
+  right:30px;
+  color:white;
+  font-size:30px;
+  cursor:pointer;
+}
+
+/* MOBIL */
+@media (max-width:600px){
+  .header {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HLAVIČKA -->
+<div class="header">
+
+  <div class="header-left">
+    <img src="logo-o2-chytra-skola.png">
+    <div class="support-text">Podpořeno z programu O2 Chytrá škola.</div>
+  </div>
+
+  <div class="header-center">
+    <h1>Deset pravidel, jak nenaletět AI dezinformacím.</h1>
+    <h2>Tvoříme pravidla (nejen) pro naše mladší žáky.</h2>
+  </div>
+
+  <div class="header-right">
+    <img src="logo-zs-pastelka.png">
+  </div>
+
+</div>
+
+<!-- BLOK -->
+<div id="method">
+<b>Jak jsme pracovali:</b><br>
+Připravili jsme pro vás AI plakátky o tom, jak nenaletět AI dezinformacím.
+</div>
+
+<!-- GALERIE -->
+<div id="board" class="grid"></div>
+
+<!-- FULLSCREEN -->
+<div id="viewer">
+  <div id="close" onclick="closeViewer()">✖</div>
+  <img id="bigImg">
+</div>
+
+<script>
+
+/* ✅ OBRÁZKY */
+const images = [
+"https://raw.githubusercontent.com/zspastelka/Co-je-AI/main/img/AI%209_1.jpg",
+"https://raw.githubusercontent.com/zspastelka/Co-je-AI/main/img/AI%209_2.jpg",
+];
+
+  
+const board = document.getElementById("board");
+
+/* vykreslení */
+images.forEach((src, i) => {
+
+  const box = document.createElement("div");
+  box.className = "case";
+
+  const title = document.createElement("h3");
+  title.textContent = "Desatero " + (i+1);
+
+  const img = document.createElement("img");
+  img.src = src;
+  img.onclick = () => openViewer(src);
+
+  box.appendChild(title);
+  box.appendChild(img);
+  board.appendChild(box);
+});
+
+/* fullscreen */
+function openViewer(src){
+  document.getElementById("bigImg").src = src;
+  document.getElementById("viewer").style.display = "flex";
+}
+
+function closeViewer(){
+  document.getElementById("viewer").style.display = "none";
+}
+
+</script>
+
+</body>
+</html>
